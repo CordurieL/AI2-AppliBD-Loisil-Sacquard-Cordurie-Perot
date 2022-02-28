@@ -11,6 +11,12 @@ $db->addConnection(parse_ini_file(dirname(__FILE__).'/conf/conf.ini'));
 $db->setAsGlobal();
 $db->bootEloquent();
 
-//TD1::Question1();
+TD1::Question1();
+
+TD1::Question2();
+
+TD1::Question3();
+
+TD1::Question4();
 
 TD1::Question5();
