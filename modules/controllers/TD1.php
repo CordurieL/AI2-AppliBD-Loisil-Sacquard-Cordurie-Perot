@@ -37,7 +37,10 @@ class TD1
 
     public static function Question4() {
         echo "Question 4:\n";
-        echo " :\n";
+        echo "Liste des 442 jeux a partir du jeu 21173 :\n";
+        foreach (Game::where("id", ">=", 21173)->take(442)->get() as $jeu) {
+            echo "  " . $jeu->name . "\n";
+        };
         echo "\n";
     }
 }
