@@ -1,0 +1,27 @@
+{
+    "name": "ai2/groupe5",
+    "description": "TD Appli BD - Groupe 5",
+    "require": {
+        "illuminate/database": "^8.73.0",
+        "php": ">=7.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "AppliBD\\": "modules/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Paul LOISIL"
+        },
+        {
+            "name": "Lucas CORDURIE"
+        },
+        {
+            "name": "Julien SAQUARD"
+        },
+        {
+            "name": "Mathis PEROT"
+        }
+    ]
+}
