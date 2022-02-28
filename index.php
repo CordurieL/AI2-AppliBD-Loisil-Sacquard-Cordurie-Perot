@@ -14,3 +14,7 @@ $db->bootEloquent();
 TD1::Question1();
 
 TD1::Question2();
+
+TD1::Question3();
+
+TD1::Question4();
