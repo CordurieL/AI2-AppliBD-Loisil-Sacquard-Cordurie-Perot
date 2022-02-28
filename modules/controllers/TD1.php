@@ -2,6 +2,7 @@
 
 use AppliBD\models\Game;
 use AppliBD\models\Company;
+use AppliBD\models\Platform;
 
 class TD1
 {
@@ -28,6 +29,9 @@ class TD1
     public static function Question3() {
         echo "Question 3:\n";
         echo "liste des platformes dont la base installée est >= 10 000 000 :\n";
+        foreach (Platform::where("install_base", ">=", 10000000)->get() as $platform) {
+            echo " " . $platform->name . "\n";
+        }
         echo "\n";
     }
 
