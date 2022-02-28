@@ -25,15 +25,33 @@ class TD1
         echo "\n";
     }
 
-    public static function Question3() {
+    public static function Question3()
+    {
         echo "Question 3:\n";
         echo "liste des platformes dont la base installée est >= 10 000 000 :\n";
         echo "\n";
     }
 
-    public static function Question4() {
+    public static function Question4()
+    {
         echo "Question 4:\n";
         echo " :\n";
+        echo "\n";
+    }
+
+    public static function Question5()
+    {
+        echo "Question 5:\n";
+        echo "Jeux et leurs descriptions par groupes de 500 :\n";
+        $i = 0;
+        $a=true;
+        while ($a) {
+            foreach (Game::where("id", ">=", $i*500+1)->take(500)->get() as $game) {
+                echo $game->id ."  Name : " . $game->name . "\n  Deck : " . $game->deck . "\n#######################################\n";
+            }
+            $i++;
+            $a = readline("Continuer ? y/n : ") == "y";
+        }
         echo "\n";
     }
 }
