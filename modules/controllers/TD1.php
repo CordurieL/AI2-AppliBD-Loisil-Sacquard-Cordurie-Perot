@@ -54,7 +54,7 @@ class TD1
         $a=true;
         while ($a) {
             foreach (Game::where("id", ">=", $i*500+1)->take(500)->get() as $game) {
-                echo $game->id ."  Name : " . $game->name . "\n  Deck : " . $game->deck . "\n#######################################\n";
+                echo "  Name : " . $game->name . "\n  Deck : " . $game->deck . "\n#######################################\n";
             }
             $i++;
             $a = readline("Continuer ? y/n : ") == "y";
