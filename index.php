@@ -12,3 +12,5 @@ $db->setAsGlobal();
 $db->bootEloquent();
 
 TD1::Question1();
+
+TD1::Question2();
