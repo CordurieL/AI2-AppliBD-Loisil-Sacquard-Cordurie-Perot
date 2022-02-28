@@ -24,4 +24,16 @@ class TD1
         }
         echo "\n";
     }
+
+    public static function Question3() {
+        echo "Question 3:\n";
+        echo "liste des platformes dont la base installée est >= 10 000 000 :\n";
+        echo "\n";
+    }
+
+    public static function Question4() {
+        echo "Question 4:\n";
+        echo " :\n";
+        echo "\n";
+    }
 }
