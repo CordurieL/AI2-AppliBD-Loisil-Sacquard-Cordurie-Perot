@@ -7,6 +7,6 @@ class Model extends \Illuminate\Database\Eloquent\Model {
     public $timestamps = false ;
 
     // public function item(){
-    //     return $this->belongsTo('\MyWishList\models\Item', 'idItem');
+    //     return $this->belongsTo('\AppliBD\models\Item', 'idItem');
     // }
 }

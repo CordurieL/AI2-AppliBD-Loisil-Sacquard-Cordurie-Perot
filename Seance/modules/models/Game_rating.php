@@ -6,6 +6,6 @@ class Game_rating extends \Illuminate\Database\Eloquent\Model {
     public $timestamps = false;
 
     public function jeu(){
-        return $this->belongsToMany('\MyWishList\models\Game', 'game2rating', 'game_id', 'rating_id');
+        return $this->belongsToMany('\AppliBD\models\Game', 'game2rating', 'game_id', 'rating_id');
     }
 }
