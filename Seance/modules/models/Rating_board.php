@@ -1,7 +1,7 @@
 <?php namespace AppliBD\models;
 
-class Rating extends \Illuminate\Database\Eloquent\Model {
-    protected $table = 'game_rating';
+class Rating_board extends \Illuminate\Database\Eloquent\Model {
+    protected $table = 'rating_board';
     protected $primaryKey = 'id';
     public $timestamps = false;
 
@@ -9,7 +9,4 @@ class Rating extends \Illuminate\Database\Eloquent\Model {
         return $this->belongsToMany('\AppliBD\models\Game', 'game2rating', "rating_id", "game_id");
     }
 
-    public function rating_boards(){
-        return $this->belongsTo('\AppliBD\models\Game', 'rating_board_id');
-    }
 }
