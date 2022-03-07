@@ -11,12 +11,13 @@ $db->addConnection(parse_ini_file(dirname(__FILE__).'/conf/conf.ini'));
 $db->setAsGlobal();
 $db->bootEloquent();
 
-TD2::Question1();
-TD2::Question2();
-TD2::Question3();
-TD2::Question4();
-TD2::Question5();
-TD2::Question6();
-TD2::Question7();
-TD2::Question8();
-TD2::Question9();
+while (true) {
+    $c = false;
+    $a = '-1';
+    $a = readline("Question numero 1 - 9 (ou 0 pour quitter) : ");
+    if ($a == '0') {
+        break;
+    }
+    $q = "Question".$a;
+    TD2::$q();
+}
