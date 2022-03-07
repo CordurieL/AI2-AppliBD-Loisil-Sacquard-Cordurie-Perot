@@ -47,10 +47,12 @@ class TD2
         $games = Game::where("name", "LIKE", "%Mario%")->get()->toArray();
         foreach ($games as $g) {
             echo "    - " . $g['name'];
-            $rating = Game::where("id", "=", $g['id'])->first()->ratings->toArray();
-            foreach ($rating as $r) {
-                echo "  (" . $r['name'] .")\n";
+            $ratings = Game::where("id", "=", $g['id'])->first()->ratings;
+            foreach ($ratings as $rating) {
+                $rating_board = $rating->rating_boards;
+                echo "  (" . $rating_board['name'] .")";
             }
+            echo "\n";
         }
     }
     
