@@ -9,7 +9,7 @@ class TD2
 {
     public static function Question1() {
         echo "Question1:\n";
-        foreach(Game::where("id", "=", "12342")->first()->personnages() as $perso) {
+        foreach(Game::where("id", "=", "12342")->first()->personnages as $perso) {
             echo "    - " . $perso->name . " (" . $perso->deck . ")\n";
         }
     }
