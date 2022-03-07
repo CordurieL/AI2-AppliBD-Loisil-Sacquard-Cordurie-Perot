@@ -23,7 +23,10 @@ A la place de regarder chaque ligne, on utilise les index pour retrouver l'infor
 # 1. Décrivez la structure du log de requêtes dans Eloquent.
 
 ```
-
+DB::connection()->enableQueryLog();
+foreach( DB::getQueryLog() as $q){
+    // code
+}
 ```
 
 # 2. expliquez le problème des N+1 query
