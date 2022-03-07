@@ -40,9 +40,14 @@ class TD2
     
     public static function Question4()
     {
-        echo "Question4:\n";
-        foreach(Game::where("name", "LIKE", '%mario%')->first()->rating as $rating) {
-            echo "    - " . $rating->id . " (" . $rating->name. "\n";
+        echo "Question4: Rating initial des jeux dont le nom contient Mario\n";
+        $games = Game::where("name", "LIKE", "%Mario%")->get()->toArray();
+        foreach ($games as $g) {
+            echo "    - " . $g['name'];
+            $rating = Game::where("id", "=", $g['id'])->first()->ratings->toArray();
+            foreach ($rating as $r) {
+                echo "  (" . $r['name'] .")\n";
+            }
         }
     }
     
