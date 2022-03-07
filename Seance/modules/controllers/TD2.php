@@ -8,18 +8,20 @@ use AppliBD\models\Platform;
 
 class TD2
 {
-    public static function Question1() {
+    public static function Question1()
+    {
         echo "Question1: Personnages du jeu 12342\n";
-        foreach(Game::where("id", "=", "12342")->first()->personnages as $perso) {
+        foreach (Game::where("id", "=", "12342")->first()->personnages as $perso) {
             echo "    - " . $perso->name . " (" . $perso->deck . ")\n";
         }
         echo "\n";
     }
     
-    public static function Question2() {
+    public static function Question2()
+    {
         echo "Question2: Personnages des jeux dont le nom commence par Mario\n";
-        foreach(Game::where("name", "like", "Mario%")->with("personnages")->get() as $jeu) {
-            foreach($jeu->personnages as $perso) {
+        foreach (Game::where("name", "like", "Mario%")->with("personnages")->get() as $jeu) {
+            foreach ($jeu->personnages as $perso) {
                 echo "    - " . $perso->name . "\n";
             }
         }
@@ -52,12 +54,13 @@ class TD2
         }
     }
     
-    public static function Question5() {
+    public static function Question5()
+    {
         echo "Question5: Les jeux dont le nom debute par Mario contenant plus de 3 personnages\n";
         $jeux = Game::with("personnages")->where("name", "like", "Mario%")->get()->filter(function ($jeu) {
             return $jeu->personnages->count() > 3;
         });
-        foreach($jeux as $jeu) {
+        foreach ($jeux as $jeu) {
             echo "    - " . $jeu->name . "\n";
         }
     }
@@ -67,7 +70,7 @@ class TD2
         echo "Question6: Jeux dont le nom debute par Mario et dont le rating initial contient 3+\n";
         $jeux = Game::where("name", "like", "Mario%")->get()->filter(function ($jeu) {
             $contient = false;
-            foreach($jeu->ratings as $rating) {
+            foreach ($jeu->ratings as $rating) {
                 if (strpos($rating->name, "3+") != false) {
                     $contient = true;
                     break;
@@ -75,7 +78,7 @@ class TD2
             }
             return $contient;
         });
-        foreach($jeux as $jeu) {
+        foreach ($jeux as $jeu) {
             echo "    - " . $jeu->name . "\n";
         }
     }
@@ -86,14 +89,14 @@ class TD2
         $jeux = Game::where("name", "like", "Mario%")->get()->filter(function ($jeu) {
             $contient = false;
             $publishers = $jeu->publishedBy;
-            foreach($publishers as $publisher) {
+            foreach ($publishers as $publisher) {
                 if (strpos($publisher->name, "Inc.") != false) {
                     $contient = true;
                     break;
                 }
             }
             $contient2 = false;
-            foreach($jeu->ratings as $rating) {
+            foreach ($jeu->ratings as $rating) {
                 if (strpos($rating->name, "3+") != false) {
                     $contient2 = true;
                     break;
@@ -101,7 +104,7 @@ class TD2
             }
             return $contient && $contient2;
         });
-        foreach($jeux as $jeu) {
+        foreach ($jeux as $jeu) {
             echo "    - " . $jeu->name . "\n";
         }
     }
@@ -112,22 +115,31 @@ class TD2
         $jeux = Game::where("name", "like", "Mario%")->get()->filter(function ($jeu) {
             $contient = false;
             $publishers = $jeu->publishedBy;
-            foreach($publishers as $publisher) {
+            foreach ($publishers as $publisher) {
                 if (strpos($publisher->name, "Inc.") != false) {
                     $contient = true;
                     break;
                 }
             }
             $contient2 = false;
-            foreach($jeu->ratings as $rating) {
+            foreach ($jeu->ratings as $rating) {
                 if (strpos($rating->name, "3+") != false) {
                     $contient2 = true;
                     break;
                 }
             }
-            return $contient && $contient2;
+            $contient3 = false;
+            $ratings = $jeu->ratings;
+            foreach ($ratings as $rating) {
+                $rating_board = $rating->rating_boards;
+                if (strcmp($rating_board->name, "CERO") == 0) {
+                    $contient3 = true;
+                    break;
+                }
+            }
+            return ($contient && $contient2 && $contient3);
         });
-        foreach($jeux as $jeu) {
+        foreach ($jeux as $jeu) {
             echo "    - " . $jeu->name . "\n";
         }
     }
@@ -149,6 +161,8 @@ class TD2
             Game::where("id", "=", 56)->first()->genres()->save($genre);
             Game::where("id", "=", 345)->first()->genres()->save($genre);
             echo "    - Associations terminés\n";
-        } else echo "    - Genre déjà existant, on n'execute pas la question\n";
+        } else {
+            echo "    - Genre déjà existant, on n'execute pas la question\n";
+        }
     }
 }
