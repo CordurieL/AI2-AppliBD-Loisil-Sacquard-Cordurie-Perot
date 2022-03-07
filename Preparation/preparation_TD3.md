@@ -23,10 +23,30 @@ A la place de regarder chaque ligne, on utilise les index pour retrouver l'infor
 # 1. Décrivez la structure du log de requêtes dans Eloquent.
 
 ```
+Si les logs sont activés
 DB::connection()->enableQueryLog();
 foreach( DB::getQueryLog() as $q){
     // code
 }
+
+php log.php
+- perso : Big Ears
+- perso : Sarah Morrison
+- perso : Tia Harribel
+-------------- 
+query : select * from `game` where `name` like ?
+ --- bindings : [  %Mario%, ] ---
+-------------- 
+ 
+--------------
+query : select * from `game` where `game`.`id` = ? limit 1
+ --- bindings : [  12342, ] ---
+--------------
+
+--------------
+query : select `character`.*, `game2character`.`game_id` as `pivot_game_id`, `game2character`.`character_id` as `pivot_character_id` from `character` inner join `game2character` on `character`.`id` = `game2character`.`character_id` where `game2character`.`game_id` = ?
+ --- bindings : [  12342, ] ---
+--------------
 ```
 
 # 2. expliquez le problème des N+1 query
