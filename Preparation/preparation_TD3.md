@@ -4,7 +4,7 @@
 
 ```
 $debut = microtime(true);
-// code à executer 
+// code à executer
 $fin = microtime(true);
 
 echo 'Temps d execution : '. ($fin - $debut) . ' secondes\n';
@@ -23,30 +23,23 @@ A la place de regarder chaque ligne, on utilise les index pour retrouver l'infor
 # 1. Décrivez la structure du log de requêtes dans Eloquent.
 
 ```
-Si les logs sont activés
+Les rêquetes Laravel sont envoyées à la base de données, mais entre temps, elles sont traduites en requêtes SQL pour être interprétables par la BDD.
+Si les logs sont activées, c'est cette traduction en SQL qui sont sauvegardées, sous forme de requête préparées. Les paramètres de la requête sont précisés après.
+
+Exemple pour d'activation des logs :
+
 DB::connection()->enableQueryLog();
 foreach( DB::getQueryLog() as $q){
     // code
 }
 
-php log.php
-- perso : Big Ears
-- perso : Sarah Morrison
-- perso : Tia Harribel
--------------- 
-query : select * from `game` where `name` like ?
- --- bindings : [  %Mario%, ] ---
--------------- 
- 
---------------
-query : select * from `game` where `game`.`id` = ? limit 1
- --- bindings : [  12342, ] ---
---------------
+Exemple d'affichage de logs :
 
 --------------
-query : select `character`.*, `game2character`.`game_id` as `pivot_game_id`, `game2character`.`character_id` as `pivot_character_id` from `character` inner join `game2character` on `character`.`id` = `game2character`.`character_id` where `game2character`.`game_id` = ?
- --- bindings : [  12342, ] ---
+query : select * from `game` where `name` like ?
+ --- bindings : [  %Mario%, ] ---
 --------------
+
 ```
 
 # 2. expliquez le problème des N+1 query
