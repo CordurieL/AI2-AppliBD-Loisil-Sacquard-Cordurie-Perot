@@ -2,6 +2,7 @@
 
 use AppliBD\models\Company;
 use AppliBD\models\Game;
+use AppliBD\models\Genre;
 use AppliBD\models\Personnage;
 use AppliBD\models\Platform;
 
@@ -63,21 +64,91 @@ class TD2
     
     public static function Question6()
     {
-        echo "Question6:\n";
+        echo "Question6: Jeux dont le nom debute par Mario et dont le rating initial contient 3+\n";
+        $jeux = Game::where("name", "like", "Mario%")->get()->filter(function ($jeu) {
+            $contient = false;
+            foreach($jeu->ratings as $rating) {
+                if (strpos($rating->name, "3+") != false) {
+                    $contient = true;
+                    break;
+                }
+            }
+            return $contient;
+        });
+        foreach($jeux as $jeu) {
+            echo "    - " . $jeu->name . "\n";
+        }
     }
     
     public static function Question7()
     {
-        echo "Question7:\n";
+        echo "Question7: Les jeux dont le nom débute par Mario, publiés par une compagnie dont le nom contient 'Inc.' et dont le rating initial contient '3+'\n";
+        $jeux = Game::where("name", "like", "Mario%")->get()->filter(function ($jeu) {
+            $contient = false;
+            $publishers = $jeu->publishedBy;
+            foreach($publishers as $publisher) {
+                if (strpos($publisher->name, "Inc.") != false) {
+                    $contient = true;
+                    break;
+                }
+            }
+            $contient2 = false;
+            foreach($jeu->ratings as $rating) {
+                if (strpos($rating->name, "3+") != false) {
+                    $contient2 = true;
+                    break;
+                }
+            }
+            return $contient && $contient2;
+        });
+        foreach($jeux as $jeu) {
+            echo "    - " . $jeu->name . "\n";
+        }
     }
     
     public static function Question8()
     {
-        echo "Question8:\n";
+        echo "Question8: Les jeux dont le nom débute Mario, publiés par une compagnie dont le nom contient 'Inc', dont le rating initial contient '3+' et ayant reçu un avis de la part du rating board nommé 'CERO'\n";
+        $jeux = Game::where("name", "like", "Mario%")->get()->filter(function ($jeu) {
+            $contient = false;
+            $publishers = $jeu->publishedBy;
+            foreach($publishers as $publisher) {
+                if (strpos($publisher->name, "Inc.") != false) {
+                    $contient = true;
+                    break;
+                }
+            }
+            $contient2 = false;
+            foreach($jeu->ratings as $rating) {
+                if (strpos($rating->name, "3+") != false) {
+                    $contient2 = true;
+                    break;
+                }
+            }
+            return $contient && $contient2;
+        });
+        foreach($jeux as $jeu) {
+            echo "    - " . $jeu->name . "\n";
+        }
     }
 
     public static function Question9()
     {
-        echo "Question9:\n";
+        echo "Question9: Ajouter un nouveau genre de jeu, et l'associer aux jeux 12, 56, 345\n";
+        $genre = new \AppliBD\models\Genre([
+            "name" => "NewGenre",
+            "deck" => "NewGenreDeck",
+            "description" => "NewGenreDesc"
+        ]);
+        if (Genre::where("name", "=", "NewGenre")->first() == null) {
+            // premiere execution de la question
+            $genre->save();
+            echo "    - Genre ajouté\n";
+
+            Game::where("id", "=", 12)->first()->genres()->save($genre);
+            Game::where("id", "=", 56)->first()->genres()->save($genre);
+            Game::where("id", "=", 345)->first()->genres()->save($genre);
+            echo "    - Associations terminés\n";
+        } else echo "    - Genre déjà existant, on n'execute pas la question\n";
     }
 }
