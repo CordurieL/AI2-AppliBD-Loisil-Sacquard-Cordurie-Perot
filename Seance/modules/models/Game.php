@@ -15,4 +15,9 @@ class Game extends \Illuminate\Database\Eloquent\Model
     {
         return $this->belongsToMany('AppliBD\models\Company', 'game_developers', 'game_id', 'comp_id');
     }
+
+    public function rating()
+    {
+        return $this->belongsToMany('\AppliBD\models\Rating', 'game2rating', "game_id", "rating_id");
+    }
 }
