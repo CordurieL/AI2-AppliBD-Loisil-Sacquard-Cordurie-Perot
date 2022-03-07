@@ -13,7 +13,7 @@ echo 'Temps d execution : '. ($fin - $debut) . ' secondes\n';
 # 2. rappelez le principe d'un index sur une colonne de table : intérêt, principe de fonctionnement
 
 ```
-L'indexage est une structure de donnée qui permet d'accélerer la récupération de données moyennant des coups additionnels d'écriture ainsi que de stockage.
+L'indexage est une structure de données qui permet d'accélerer la récupération de données moyennant des coups additionnels d'écriture ainsi que de stockage.
 
 A la place de regarder chaque ligne, on utilise les index pour retrouver l'information.
 ```
@@ -32,6 +32,6 @@ foreach( DB::getQueryLog() as $q){
 # 2. expliquez le problème des N+1 query
 
 ```
-Si une table contient un nombre N d'objet, elle va faire une requête pour tous les récupérer et une requête pour chaque objet ce qui donne N+1 requête.
+Si une table contient un nombre N d'objet, elle va faire une requête pour tous les récupérer et une requête pour chaque objet ce qui donne N+1 requêtes.
 Ce qui augmente le nombre de requetes de manière exponentielle (et donc ralenti drastiquement l'application)
 ```
