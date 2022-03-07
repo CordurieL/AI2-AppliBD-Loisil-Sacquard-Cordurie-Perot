@@ -38,8 +38,13 @@ class TD2
     }
     
     public static function Question5() {
-        echo "Question5:\n";
-
+        echo "Question5: Les jeux dont le nom debute par Mario contenant plus de 3 personnages\n";
+        $jeux = Game::with("personnages")->where("name", "like", "Mario%")->get()->filter(function ($jeu) {
+            return $jeu->personnages->count() > 3;
+        });
+        foreach($jeux as $jeu) {
+            echo "    - " . $jeu->name . "\n";
+        }
     }
     
     public static function Question6() {
