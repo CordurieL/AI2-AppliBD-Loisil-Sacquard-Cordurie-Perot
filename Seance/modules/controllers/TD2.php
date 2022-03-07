@@ -26,7 +26,9 @@ class TD2
     
     public static function Question4() {
         echo "Question4:\n";
-
+        foreach(Game::where("name", "LIKE", '%mario%')->first()->rating as $rating) {
+            echo "    - " . $rating->id . " (" . $rating->name. "\n";
+        }
     }
     
     public static function Question5() {

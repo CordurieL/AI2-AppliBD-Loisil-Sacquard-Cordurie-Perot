@@ -8,4 +8,8 @@ class Game extends \Illuminate\Database\Eloquent\Model {
     public function personnages() {
         return $this->belongsToMany('\AppliBD\models\Personnage', 'game2character', "game_id", "character_id");
     }
+
+    public function rating() {
+        return $this->belongsToMany('\AppliBD\models\Rating', 'game2rating', "game_id", "rating_id");
+    }
 }
