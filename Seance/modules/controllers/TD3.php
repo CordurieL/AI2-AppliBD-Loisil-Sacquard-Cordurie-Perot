@@ -36,4 +36,9 @@ class TD3
             return $contient;
         });
     }
+
+    public static function Question5($cond)
+    {
+        $res = Game::where("name", "like", $cond)->get();
+    }
 }
