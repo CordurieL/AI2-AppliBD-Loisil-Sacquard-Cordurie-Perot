@@ -151,4 +151,19 @@ class TD2
             echo "    - Associations terminés\n";
         } else echo "    - Genre déjà existant, on n'execute pas la question\n";
     }
+
+
+    public static function Question10()
+    {
+        echo "Question10: Afficher le nom des personnages des jeux dont le nom (du jeu) contient 'Mario'\n";
+        Game::where("name", "like", "Mario%")->get()->filter(function ($jeu) {
+            Game2Character::where("game_id", "=", $jeu->id)->get()->filter(function ($perso) {
+                // $perso->id 
+                $char = Character::where("id", "=", $perso->id)->get();
+                echo "\t-> Personnage dans Mario: " . $char->name; 
+            });
+        });
+    }
+  
+
 }

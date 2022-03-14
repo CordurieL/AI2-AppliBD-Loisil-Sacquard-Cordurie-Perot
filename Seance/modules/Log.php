@@ -8,8 +8,10 @@ class Log {
     }
 
     public static function afficherLogs() {
-        foreach (DB::getQueryLog() as $log) {
-            echo "- " . $log['query'] . "\n";
+        $logs = DB::getQueryLog();
+        echo "Nombre de requetes: " . count($logs) . "\n";
+        foreach ($logs as $log) {
+            //echo "- " . $log['query'] . "\n";
         }
     }
 }

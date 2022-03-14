@@ -6,7 +6,11 @@ class Personnage extends \Illuminate\Database\Eloquent\Model {
     protected $primaryKey = 'id' ;
     public $timestamps = false ;
 
-    public function games(){
+    public function games() {
         return $this->belongsToMany('\AppliBD\models\Game', 'game2character', "character_id", "game_id");
+    }
+
+    public function firstGame() {
+        return $this->belongsTo('\AppliBD\models\Game', 'first_appeared_in_game_id', 'game_id');
     }
 }
