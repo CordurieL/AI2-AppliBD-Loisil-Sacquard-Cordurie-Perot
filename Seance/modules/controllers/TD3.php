@@ -41,4 +41,9 @@ class TD3
     {
         $res = Game::where("name", "like", $cond)->get();
     }
+
+    public static function Question6($cond)
+    {
+        $res = Company::where("location_country", "=", $cond)->get();
+    }
 }
