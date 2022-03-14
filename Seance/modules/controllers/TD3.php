@@ -10,7 +10,7 @@ class TD3
 {
     public static function Question1()
     {
-        $res = Game::all()->get();
+        $res = Game::all();
     }
 
     public static function Question2()

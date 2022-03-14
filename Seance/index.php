@@ -15,11 +15,18 @@ $db->bootEloquent();
 while (true) {
     $c = false;
     $a = '-1';
-    $a = readline("Question numero 1 - 4 (ou 0 pour quitter) : ");
+    $a = readline("Question numero 1 - 5 (ou 0 pour quitter) : ");
     if ($a == '0')
         break;
     $q = "Question".$a;
-    Timer::start();
-    TD3::$q();
-    Timer::stop();
+    if ($a == 5) {
+        $cond = readline("Condition : ");
+        Timer::start();
+        TD3::$q($cond);
+        Timer::stop();
+    } else {
+        Timer::start();
+        TD3::$q();
+        Timer::stop();
+    }
 }
