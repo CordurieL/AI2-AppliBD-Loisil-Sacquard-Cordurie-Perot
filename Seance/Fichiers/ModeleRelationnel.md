@@ -35,3 +35,7 @@ rating_board (<ins>id</ins>, name, deck, description)
 similar_games (game1_id, game2_id)
 
 theme (<ins>id</ins>, name)
+
+users (name, surname, <ins>email</ins>, address, phone, birthdate, created_at, updated_at)
+
+comment (<ins>id</ins>, title, content, created_at, updated_at)
