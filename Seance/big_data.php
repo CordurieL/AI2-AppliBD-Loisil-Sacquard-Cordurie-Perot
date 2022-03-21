@@ -41,7 +41,7 @@ for ($i=0; $i < 25000; $i++) {
 }
 echo "100%";
 echo "\nCreating comments...\n";
-for ($i=0; $i < 250000; $i++) { 
+for ($i=0; $i < 250000; $i++) {
     if ($i % 2500 == 0) echo ($i / 2500) . "%\r";
     $user = createComment($ids[rand(0, 24999)]);
 }
