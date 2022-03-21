@@ -3,10 +3,10 @@
 class Model extends \Illuminate\Database\Eloquent\Model {
     protected $table = 'user';
     protected $fillable = ["name", "surname", "email", "address", "phone", "birthdate"];
-    protected $primaryKey = 'email' ;
+    protected $primaryKey = 'id' ;
     public $timestamps = true ;
 
     public function comments(){
-        return $this->hasMany('\AppliBD\models\Comment', 'user_email');
+        return $this->hasMany('\AppliBD\models\Comment', 'user_id');
     }
 }

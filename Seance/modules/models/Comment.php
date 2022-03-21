@@ -2,11 +2,11 @@
 
 class Comment extends \Illuminate\Database\Eloquent\Model {
     protected $table = 'comment';
-    protected $fillable = ["title", "user_email", "content"];
+    protected $fillable = ["title", "user_id", "content"];
     protected $primaryKey = 'id' ;
     public $timestamps = true ;
 
     public function user(){
-        return $this->belongsTo('\AppliBD\models\User', 'user_email');
+        return $this->belongsTo('\AppliBD\models\User', 'user_id');
     }
 }
