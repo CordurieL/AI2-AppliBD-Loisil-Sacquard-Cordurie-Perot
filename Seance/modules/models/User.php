@@ -1,6 +1,6 @@
 <?php namespace AppliBD\models;
 
-class Model extends \Illuminate\Database\Eloquent\Model {
+class User extends \Illuminate\Database\Eloquent\Model {
     protected $table = 'user';
     protected $fillable = ["name", "surname", "email", "address", "phone", "birthdate"];
     protected $primaryKey = 'id' ;
