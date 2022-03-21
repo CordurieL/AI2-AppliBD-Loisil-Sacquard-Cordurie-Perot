@@ -25,11 +25,17 @@ function createUser() {
 
 function createComment($userID) {
     $fake = Faker\Factory::create();
+    $sentence = $fake->sentence();
+    
+    // le titre est composé des deux premiers mots de la phrase
+    $list = explode(" ", $sentence);
+    $title = $list[0] . " " . $list[1];
+
     return Comment::create([
-        "title" => $fake->title(),
+        "title" => $title,
         "user_id" => $userID,
         "game_id" => 12342,
-        "content" => $fake->sentence()
+        "content" => $sentence
     ]);
 }
 
