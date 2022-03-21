@@ -9,6 +9,7 @@
 ```sql
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
 `name` varchar(128) NOT NULL,
 `surname` varchar(128) DEFAULT NULL,
 `email` varchar(128) DEFAULT NULL,
@@ -17,13 +18,14 @@ CREATE TABLE `user` (
 `birthdate` DATE DEFAULT NULL,
 `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `updated_at` timestamp NULL DEFAULT NULL,
-PRIMARY KEY (`email`)
+PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
-`user_email` varchar(128) DEFAULT NULL,
+`user_id` int(11) NOT NULL,
+`game_id` int(11) NOT NULL,
 `title` varchar(128) DEFAULT NULL,
 `content` TEXT DEFAULT NULL,
 `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
