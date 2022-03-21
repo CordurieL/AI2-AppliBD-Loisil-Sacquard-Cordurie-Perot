@@ -38,4 +38,4 @@ theme (<ins>id</ins>, name)
 
 user (name, surname, <ins>email</ins>, address, phone, birthdate, created_at, updated_at)
 
-comment (<ins>id</ins>, title, content, created_at, updated_at)
+comment (<ins>id</ins>, user_id, title, content, created_at, updated_at)
