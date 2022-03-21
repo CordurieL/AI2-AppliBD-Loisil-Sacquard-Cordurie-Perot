@@ -2,7 +2,7 @@
 
 class Comment extends \Illuminate\Database\Eloquent\Model {
     protected $table = 'comment';
-    protected $fillable = ["title", "user_id", "content"];
+    protected $fillable = ["title", "user_id", "game_id", "content"];
     protected $primaryKey = 'id' ;
     public $timestamps = true ;
 
