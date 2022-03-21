@@ -1,5 +1,7 @@
-# AI2-AppliBD-Loisil-Sacquard-Cordurie
+# AI2 - Appli BD
 
-Lucas Cordurié
-Paul Loisil
-Julien Sacquard
+## Noms
+- SAQUARD Julien
+- CORDURIE Lucas
+- LOISIL Paul
+- PEROT Mathis
