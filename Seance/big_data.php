@@ -28,16 +28,22 @@ function createComment($userID) {
     return Comment::create([
         "title" => $fake->title(),
         "user_id" => $userID,
+        "game_id" => 12342,
         "content" => $fake->sentence()
     ]);
 }
 
+$ids = [];
 echo "Creating users...\n";
 for ($i=0; $i < 25000; $i++) { 
     if ($i % 250 == 0) echo ($i / 250) . "%\r";
-    $user = createUser();
-    for ($j=0; $j < 10; $j++) { 
-        createComment($user->id);
-    }
+    $ids[$i] = createUser()->id;
 }
+echo "100%";
+echo "\nCreating comments...\n";
+for ($i=0; $i < 250000; $i++) { 
+    if ($i % 2500 == 0) echo ($i / 2500) . "%\r";
+    $user = createComment($ids[rand(0, 24999)]);
+}
+echo "100%";
 echo "\nDone!\n";
