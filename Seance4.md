@@ -13,7 +13,7 @@ CREATE TABLE `user` (
 `name` varchar(128) NOT NULL,
 `surname` varchar(128) DEFAULT NULL,
 `email` varchar(128) DEFAULT NULL,
-`adress` varchar(128) DEFAULT NULL,
+`address` varchar(128) DEFAULT NULL,
 `phone` varchar(128) DEFAULT NULL,
 `birthdate` DATE DEFAULT NULL,
 `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
