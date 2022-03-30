@@ -20,9 +20,7 @@ class TD5_2
         $jsonGamesArray = [];
         $gamesCollection = Game::offset((($checkedPage)-1)*200)->limit(200)->get();//->skip((($checkedPage)-1)*200)->take(200);
         foreach ($gamesCollection as $game) {
-            $gameToUpdate = TD5_1::make_json($game);
-            $gameToUpdate["links"] = ["self" => ["href" => Container::getContainer()->router->pathFor('game', ['id' => $game->id])]];
-            array_push($jsonGamesArray, $gameToUpdate);
+            array_push($jsonGamesArray, TD5_1::make_json($game, false));
         }
         $res["games"] = $jsonGamesArray;
         $res["links"]= [

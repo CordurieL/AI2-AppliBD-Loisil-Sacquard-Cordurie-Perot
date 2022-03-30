@@ -11,22 +11,24 @@ class TD5_1 {
         return TD5_1::make_json($game);
     }
 
-    public static function make_json($game) {
-        return [
+    public static function make_json($game, $details=true) {
+        $res = [
             "game" => [
                 "id" => $game->id,
                 "name" => $game->name,
                 "alias" => $game->alias,
                 "deck" => $game->deck,
                 "description" => $game->description,
-                "original_release_date" => $game->original_release_date,
-                "platforms" => TD5_1::getPlatforms($game)
+                "original_release_date" => $game->original_release_date
             ],
             "link" => [
+                "self" => ["href" => Container::getContainer()->router->pathFor('game', ['id' => $game->id])],
                 "comments" => ["href" => Container::getContainer()->router->pathFor("game_comments", ["id" => $game->id])],
                 "characters" => ["href" => Container::getContainer()->router->pathFor("game_characters", ["id" => $game->id])]
             ]
         ];
+        if ($details) $res["game"]["platforms"] = TD5_1::getPlatforms($game);
+        return $res;
     }
 
     public static function getPlatforms($game) {
