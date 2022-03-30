@@ -94,4 +94,14 @@ $app->get("[/]", function ($request, $response, $args) {
     return $response;
 })->setName("home");
 
+$app->get("/api/platforms/{id}[/]", function ($request, $response, $args) {
+    $id = $args['id'];
+    $platform = TD5_2::getPlatform($id);
+    if ($platform) {
+        return $response->withJson($platform);
+    } else {
+        return $response->withStatus(404);
+    }
+})->setName("platforms");
+
 $app->run();

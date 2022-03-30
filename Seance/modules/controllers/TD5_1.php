@@ -2,14 +2,19 @@
 
 use AppliBD\models\Game;
 
-class TD5_1 {
-    public static function getGame($id) {
+class TD5_1
+{
+    public static function getGame($id)
+    {
         $game = Game::find($id);
-        if (!$game) return [];
+        if (!$game) {
+            return [];
+        }
         return TD5_1::make_json($game);
     }
 
-    public static function make_json($game) {
+    public static function make_json($game)
+    {
         return [
             "game" => [
                 "id" => $game->id,
@@ -27,7 +32,8 @@ class TD5_1 {
         ];
     }
 
-    public static function getPlatforms($game) {
+    public static function getPlatforms($game)
+    {
         $res = [];
         $platforms = $game->platforms;
         foreach ($platforms as $platform) {
@@ -42,7 +48,8 @@ class TD5_1 {
         return $res;
     }
 
-    public static function getGameCharacters($id) {
+    public static function getGameCharacters($id)
+    {
         $characters = Game::find($id)->personnages;
         $res = [];
         foreach ($characters as $char) {
@@ -59,7 +66,8 @@ class TD5_1 {
         return ["characters" => $res];
     }
 
-    public static function addGameComment($game_id, $body) {
+    public static function addGameComment($game_id, $body)
+    {
         var_dump(json_decode($body, true));
     }
 }
