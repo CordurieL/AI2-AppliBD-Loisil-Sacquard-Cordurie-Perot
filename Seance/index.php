@@ -54,3 +54,5 @@ $app->get("/api/games/{id}/comments", function ($request, $response, $args) {
     else
         return $response->withStatus(404);
 });
+
+$app->run();
