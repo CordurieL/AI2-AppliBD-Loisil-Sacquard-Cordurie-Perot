@@ -3,6 +3,7 @@ require_once "vendor/autoload.php";
 
 //connection a la base de donnees par le fichier conf.ini
 
+use AppliBD\controllers\Container;
 use AppliBD\controllers\TD5;
 use AppliBD\controllers\TD5_1;
 use AppliBD\controllers\TD5_2;
@@ -29,6 +30,8 @@ $app = new \Slim\App([
     ],
 ]);
 
+Container::setContainer($app->getContainer());
+
 $app->get("/api/games/{id}", function ($request, $response, $args) {
     $id = $args['id'];
     $game = TD5_1::getGame($id);
@@ -37,7 +40,7 @@ $app->get("/api/games/{id}", function ($request, $response, $args) {
     } else {
         return $response->withStatus(404);
     }
-});
+})->setName("game");
 
 $app->get("/api/games", function ($request, $response, $args) {
     $games = TD5_2::getGames($request->getQueryParam('page'));
@@ -53,6 +56,16 @@ $app->get("/api/games/{id}/comments", function ($request, $response, $args) {
     $game = TD5_3::getGameComments($id);
     if ($game) {
         return $response->withJson($game);
+    } else {
+        return $response->withStatus(404);
+    }
+});
+
+$app->post("/api/games/{id}/comments", function ($request, $response, $args) {
+    $id = $args['id'];
+    $game = TD5_1::addGameComment($id, $request->getBody());
+    if ($game) {
+        return $response->withStatus(201)->withJson($game);
     } else {
         return $response->withStatus(404);
     }

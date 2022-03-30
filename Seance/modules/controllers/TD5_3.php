@@ -1,9 +1,9 @@
 <?php namespace AppliBD\controllers;
 
+use AppliBD\models\Comment;
 
 class TD5_3 {
     public static function getGameComments($id) {
-		// http://www.gamepedia.net/api/games/2/comments
         $res = [];
         $comments = Comment::where("game_id", "=", $id)->get();
         foreach ($comments as $comment) {
