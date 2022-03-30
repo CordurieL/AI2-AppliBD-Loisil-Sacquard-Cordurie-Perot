@@ -9,6 +9,7 @@ class TD5_2
     {
         $maxPage = round((Game::count()/200), 0, PHP_ROUND_HALF_UP);
         $checkedPage = $page;
+        $checkedPage = $checkedPage == null ? 1 : $checkedPage;
         if ($checkedPage<1) {
             $checkedPage = 1;
         }
@@ -17,7 +18,7 @@ class TD5_2
         }
         $res = [];
         $jsonGamesArray = [];
-        $gamesCollection = Game::where("id", ">=", (($checkedPage-1)*200)+1)->take(200)->get();//Game::take(200)->get();
+        $gamesCollection = Game::offset((($checkedPage)-1)*200)->limit(200)->get();//->skip((($checkedPage)-1)*200)->take(200);
         foreach ($gamesCollection as $game) {
             $gameToUpdate = TD5_1::make_json($game);
             $gameToUpdate["links"] = ["self" => ["href" => Container::getContainer()->router->pathFor('game', ['id' => $game->id])]];
