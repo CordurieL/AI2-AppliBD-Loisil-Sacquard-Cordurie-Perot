@@ -13,7 +13,7 @@ class TD5_3 {
                 "content" => $comment->content,
                 "user_id" => $comment->user_id,
                 "created_at" => $comment->created_at,
-                "href" => "/api/games/{$comment->id}/comments"
+                "href" => Container::getContainer()->router->pathFor("comments", ["id" => $comment->id])
             ]);
         }
         return $res;

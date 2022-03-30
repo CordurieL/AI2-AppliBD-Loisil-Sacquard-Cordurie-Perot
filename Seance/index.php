@@ -32,7 +32,7 @@ $app = new \Slim\App([
 
 Container::setContainer($app->getContainer());
 
-$app->get("/api/games/{id}", function ($request, $response, $args) {
+$app->get("/api/games/{id}[/]", function ($request, $response, $args) {
     $id = $args['id'];
     $game = TD5_1::getGame($id);
     if ($game) {
@@ -42,16 +42,16 @@ $app->get("/api/games/{id}", function ($request, $response, $args) {
     }
 })->setName("game");
 
-$app->get("/api/games", function ($request, $response, $args) {
+$app->get("/api/games[/]", function ($request, $response, $args) {
     $games = TD5_2::getGames($request->getQueryParam('page'));
     if ($games) {
         return $response->withJson($games);
     } else {
         return $response->withStatus(404);
     }
-});
+})->setName("games");
 
-$app->get("/api/games/{id}/comments", function ($request, $response, $args) {
+$app->get("/api/games/{id}/comments[/]", function ($request, $response, $args) {
     $id = $args['id'];
     $game = TD5_3::getGameComments($id);
     if ($game) {
@@ -59,9 +59,9 @@ $app->get("/api/games/{id}/comments", function ($request, $response, $args) {
     } else {
         return $response->withStatus(404);
     }
-});
+})->setName("game_comments");
 
-$app->post("/api/games/{id}/comments", function ($request, $response, $args) {
+$app->post("/api/games/{id}/comments[/]", function ($request, $response, $args) {
     $id = $args['id'];
     $game = TD5_1::addGameComment($id, $request->getBody());
     if ($game) {
@@ -71,7 +71,7 @@ $app->post("/api/games/{id}/comments", function ($request, $response, $args) {
     }
 });
 
-$app->get("/api/games/{id}/characters", function ($request, $response, $args) {
+$app->get("/api/games/{id}/characters[/]", function ($request, $response, $args) {
     $id = $args['id'];
     $game = TD5_1::getGameCharacters($id);
     if ($game) {
@@ -79,9 +79,9 @@ $app->get("/api/games/{id}/characters", function ($request, $response, $args) {
     } else {
         return $response->withStatus(404);
     }
-});
+})->setName("game_characters");
 
-$app->get("/", function ($request, $response, $args) {
+$app->get("[/]", function ($request, $response, $args) {
     $response->getBody()->write("
     <h1>Routes:</h1>
     <ul>
@@ -92,6 +92,6 @@ $app->get("/", function ($request, $response, $args) {
     </ul>
     ");
     return $response;
-});
+})->setName("home");
 
 $app->run();
