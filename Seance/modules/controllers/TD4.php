@@ -21,16 +21,11 @@ class TD4
     }
 
     /*SELECT * FROM user INNER JOIN comment ON comment.user_id = user.id group by user.id HAVING count(comment.user_id) > 5; */
-    // Laravel 
-
     public static function Question2()
     {
-        /*$users = User::with(["comments" => function ($comment) {
-            $comment->groupBy('user_id')->havingRaw("count(*) > 5")->get();
-        }]);*/
-        $users = User::where("id", ">", 24950)->get()->filter(function ($user) {
+        $users = User::with("comments")->get()->filter(function ($user) {
             $countComments =  $user->comments->count();
-            if ($countComments >= 15) {
+            if ($countComments >23) {
                 return $user->name;
             }
         });
