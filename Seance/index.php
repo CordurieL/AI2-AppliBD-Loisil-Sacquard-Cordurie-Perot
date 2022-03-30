@@ -58,4 +58,17 @@ $app->get("/api/games/{id}/comments", function ($request, $response, $args) {
     }
 });
 
+$app->get("/", function ($request, $response, $args) {
+    $response->getBody()->write("
+    <h1>Routes:</h1>
+    <ul>
+        <li><p>/api/games/{id}</p></li>
+        <li><p>/api/games</p></li>
+        <li><p>/api/games/{id}/comments</p></li>
+        <li><p>/api/games/{id}/characters</p></li>
+    </ul>
+    ");
+    return $response;
+});
+
 $app->run();
