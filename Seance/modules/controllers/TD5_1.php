@@ -21,8 +21,8 @@ class TD5_1 {
                 "platforms" => TD5_1::getPlatforms($game)
             ],
             "link" => [
-                "comments" => ["href" => "/api/games/{$game->id}/comments"],
-                "characters" => ["href" => "/api/games/{$game->id}/characters"]
+                "comments" => ["href" => Container::getContainer()->router->pathFor("game_comments", ["id" => $game->id])],
+                "characters" => ["href" => Container::getContainer()->router->pathFor("game_characters", ["id" => $game->id])]
             ]
         ];
     }
@@ -36,7 +36,7 @@ class TD5_1 {
                 "name" => $platform->name,
                 "alias" => $platform->alias,
                 "abbreviation" => $platform->abbreviation,
-                "href" => "/api/platforms/{$platform->id}"
+                "href" => Container::getContainer()->router->pathFor("platforms", ["id" => $platform->id])
             ]);
         }
         return $res;
@@ -52,10 +52,14 @@ class TD5_1 {
                     "name" => $char->name
                 ],
                 "links" => [
-                    "self" => ["href" => "/api/characters/{$char->id}"]
+                    "self" => ["href" => Container::getContainer()->router->pathFor("game_characters", ["id" => $id])]
                 ]
             ]);
         }
         return ["characters" => $res];
+    }
+
+    public static function addGameComment($game_id, $body) {
+        var_dump(json_decode($body, true));
     }
 }
