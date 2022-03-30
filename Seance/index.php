@@ -53,7 +53,7 @@ $app->get("/api/games[/]", function ($request, $response, $args) {
 
 $app->get("/api/games/{id}/comments[/]", function ($request, $response, $args) {
     $id = $args['id'];
-    $game = TD5_3::getGameComments($id);
+    $game = TD5_3::getGameComments($id, $request->getQueryParam("page"));
     if ($game) {
         return $response->withJson($game);
     } else {
@@ -61,9 +61,14 @@ $app->get("/api/games/{id}/comments[/]", function ($request, $response, $args) {
     }
 })->setName("game_comments");
 
+$app->get("/api/games/{id}/addComment[/]", function ($request, $response, $args) {
+    $id = $args['id'];
+    $response->getBody()->write(TD5_1::generate_addComment($id));
+})->setName("add_comment");
+
 $app->post("/api/games/{id}/comments[/]", function ($request, $response, $args) {
     $id = $args['id'];
-    $game = TD5_1::addGameComment($id, $request->getBody());
+    $game = TD5_1::addGameComment($id, $request);
     if ($game) {
         return $response->withStatus(201)->withJson($game);
     } else {
@@ -109,6 +114,7 @@ $app->get("[/]", function ($request, $response, $args) {
         <li><p>/api/platforms/{id}</p></li>
         <li><p>/api/comments/{id}</p></li>
         <li><p>/api/games</p></li>
+        <li><p>/api/games/{id}/addComment</p></li>
         <li><p>/api/games/{id}/comments</p></li>
         <li><p>/api/games/{id}/characters</p></li>
     </ul>

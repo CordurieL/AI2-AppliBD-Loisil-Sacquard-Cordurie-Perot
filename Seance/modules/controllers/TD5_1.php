@@ -61,15 +61,17 @@ class TD5_1 {
         return ["characters" => $res];
     }
 
-    public static function addGameComment($game_id, $body) {
-        $data = json_decode($body, true);
-        $user = User::find($data["email"]);
-        if (!$user) return null;
+    public static function addGameComment($game_id, $request) {
+        $user = User::where("email", $request->getParam("email"))->first();
+        if (!$user) {
+            echo "Erreur: impossible de trouver un user avec cet email";
+            return null;
+        }
         $comment = Comment::create([
-            "title" => $data["title"],
+            "title" => $request->getParam("title"),
             "user_id" => $user->id,
             "game_id" => $game_id,
-            "content" => $data["content"]
+            "content" => $request->getParam("content")
         ]);
         return TD5_1::make_comment($comment);
     }
@@ -93,5 +95,19 @@ class TD5_1 {
                 "self" => ["href" => Container::getContainer()->router->pathFor("comments", ["id" => $comment->id])]
             ]
         ];
+    }
+
+    public static function generate_addComment($id) {
+        return "
+            <h1>Add a comment on game {$id}</h1>
+            <form action='/api/games/{$id}/comments' method='post'>
+                <input type='email' name='email' id='email' placeholder='email' value=''>
+                <input type='text' name='title' id='title' placeholder='title' value=''>
+                <br>
+                <textarea name='content' id='content' placeholder='content' cols='30' rows='10'></textarea>
+                <br>
+                <button type='submit'>Add comment</button>
+            </form>
+        ";
     }
 }
