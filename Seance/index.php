@@ -58,6 +58,16 @@ $app->get("/api/games/{id}/comments", function ($request, $response, $args) {
     }
 });
 
+$app->get("/api/games/{id}/characters", function ($request, $response, $args) {
+    $id = $args['id'];
+    $game = TD5_1::getGameCharacters($id);
+    if ($game) {
+        return $response->withJson($game);
+    } else {
+        return $response->withStatus(404);
+    }
+});
+
 $app->get("/", function ($request, $response, $args) {
     $response->getBody()->write("
     <h1>Routes:</h1>
