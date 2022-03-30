@@ -5,6 +5,7 @@ require_once "vendor/autoload.php";
 
 use AppliBD\controllers\TD5;
 use AppliBD\controllers\TD5_1;
+use AppliBD\controllers\TD5_2;
 use AppliBD\controllers\TD5_3;
 use Illuminate\Database\Capsule\Manager as DB;
 
@@ -31,28 +32,30 @@ $app = new \Slim\App([
 $app->get("/api/games/{id}", function ($request, $response, $args) {
     $id = $args['id'];
     $game = TD5_1::getGame($id);
-    if ($game)
+    if ($game) {
         return $response->withJson($game);
-    else
+    } else {
         return $response->withStatus(404);
+    }
 });
 
 $app->get("/api/games", function ($request, $response, $args) {
-    $id = $args['id'];
     $games = TD5_2::getGames($request->getQueryParam('page'));
-    if ($games)
+    if ($games) {
         return $response->withJson($games);
-    else
+    } else {
         return $response->withStatus(404);
+    }
 });
 
 $app->get("/api/games/{id}/comments", function ($request, $response, $args) {
     $id = $args['id'];
     $game = TD5_3::getGameComments($id);
-    if ($game)
+    if ($game) {
         return $response->withJson($game);
-    else
+    } else {
         return $response->withStatus(404);
+    }
 });
 
 $app->run();
