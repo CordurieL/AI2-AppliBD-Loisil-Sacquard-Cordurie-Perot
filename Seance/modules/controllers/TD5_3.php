@@ -12,6 +12,7 @@ class TD5_3 {
                 "title" => $comment->title,
                 "content" => $comment->content,
                 "user_id" => $comment->user_id,
+                "created_at" => $comment->created_at,
                 "href" => "/api/games/{$comment->id}/comments"
             ]);
         }
