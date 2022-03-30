@@ -29,4 +29,8 @@ class Game extends \Illuminate\Database\Eloquent\Model
     public function platforms() {
         return $this->belongsToMany("\AppliBD\models\Platform", "game2platform", "game_id", "platform_id");
     }
+
+    public function comments() {
+        return $this->hasMany("\AppliBD\models\Comment", "game_id");
+    }
 }

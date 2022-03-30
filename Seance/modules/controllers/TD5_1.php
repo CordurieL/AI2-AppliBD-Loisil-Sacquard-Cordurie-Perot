@@ -74,6 +74,12 @@ class TD5_1 {
         return TD5_1::make_comment($comment);
     }
 
+    public static function getComment($id) {
+        $comment = Comment::find($id);
+        if (!$comment) return [];
+        return TD5_1::make_comment($comment);
+    }
+
     public static function make_comment($comment) {
         return [
             "comment" => [

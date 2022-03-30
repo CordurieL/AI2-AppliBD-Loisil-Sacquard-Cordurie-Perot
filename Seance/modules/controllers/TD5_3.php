@@ -1,11 +1,11 @@
 <?php namespace AppliBD\controllers;
 
-use AppliBD\models\Comment;
+use AppliBD\models\Game;
 
 class TD5_3 {
     public static function getGameComments($id) {
         $res = [];
-        $comments = Comment::where("game_id", "=", $id)->get();
+        $comments = Game::find($id)->comments;
         foreach ($comments as $comment) {
             array_push($res, [
                 "id" => $comment->id,

@@ -81,19 +81,6 @@ $app->get("/api/games/{id}/characters[/]", function ($request, $response, $args)
     }
 })->setName("game_characters");
 
-$app->get("[/]", function ($request, $response, $args) {
-    $response->getBody()->write("
-    <h1>Routes:</h1>
-    <ul>
-        <li><p>/api/games/{id}</p></li>
-        <li><p>/api/games</p></li>
-        <li><p>/api/games/{id}/comments</p></li>
-        <li><p>/api/games/{id}/characters</p></li>
-    </ul>
-    ");
-    return $response;
-})->setName("home");
-
 $app->get("/api/platforms/{id}[/]", function ($request, $response, $args) {
     $id = $args['id'];
     $platform = TD5_2::getPlatform($id);
@@ -103,5 +90,30 @@ $app->get("/api/platforms/{id}[/]", function ($request, $response, $args) {
         return $response->withStatus(404);
     }
 })->setName("platforms");
+
+$app->get("/api/comments/{id}[/]", function ($request, $response, $args) {
+    $id = $args['id'];
+    $comment = TD5_1::getComment($id);
+    if ($comment) {
+        return $response->withJson($comment);
+    } else {
+        return $response->withStatus(404);
+    }
+})->setName("comments");
+
+$app->get("[/]", function ($request, $response, $args) {
+    $response->getBody()->write("
+    <h1>Routes:</h1>
+    <ul>
+        <li><p>/api/games/{id}</p></li>
+        <li><p>/api/platforms/{id}</p></li>
+        <li><p>/api/comments/{id}</p></li>
+        <li><p>/api/games</p></li>
+        <li><p>/api/games/{id}/comments</p></li>
+        <li><p>/api/games/{id}/characters</p></li>
+    </ul>
+    ");
+    return $response;
+})->setName("home");
 
 $app->run();
